@@ -26,20 +26,55 @@ public class GameBO {
         while (true) {
             try {
                 clearReporter();
+            } catch (Exception e) {
+            }
+            try {
                 startChrome(hide);
+            } catch (Exception e) {
+            }
+            try {
                 login();
+            } catch (Exception e) {
+            }
+            try {
                 lift();
+            } catch (Exception e) {
+            }
+            try {
                 merchandising();
+            } catch (Exception e) {
+            }
+            try {
                 buy();
+            } catch (Exception e) {
+            }
+            try {
                 money();
+            } catch (Exception e) {
+            }
+            try {
                 buy2();
+            } catch (Exception e) {
+            }
+            try {
                 quests();
+            } catch (Exception e) {
+            }
+            try {
                 doors();
+            } catch (Exception e) {
+            }
+            try {
                 humans();
+            } catch (Exception e) {
+            }
+            try {
                 stocked();
+            } catch (Exception e) {
+            }
+            try {
                 labelReport();
             } catch (Exception e) {
-                e.printStackTrace();
             }
             closeChrome();
             printReport();
