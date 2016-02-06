@@ -129,6 +129,12 @@ public class GamePO extends Page {
     @FindBy(xpath = "//a[contains(@href,'m=restart')]")
     public WebControl restartPolyana;
 
+    @FindBy(xpath = "//a[contains(@href,'&m=start&t=1')]")
+    public WebControl smallPolyana;
+
+    @FindBy(xpath = "//a[contains(@href,'&m=start&t=2')]")
+    public WebControl bigPolyana;
+
     public GamePO(WebDriver driver) {
         super(driver);
     }

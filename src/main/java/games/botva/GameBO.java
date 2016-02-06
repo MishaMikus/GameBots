@@ -36,9 +36,9 @@ public class GameBO {
                 arena();
                 sani();
                 dozor();
+                minePolyana();
                 mine();
                 eat();
-                minePolyana();
             } catch (Exception ignored) {
                 close();
             }
@@ -47,12 +47,14 @@ public class GameBO {
     }
 
     private void minePolyana() {
-        switchGameFrame("mine.php?a=mine&m=start&t=1");
+        switchGameFrame("mine.php?a=mine");
+        gamePO.smallPolyana.click();
         while (gamePO.randomPolyana.isDisplayed()) {
             gamePO.randomPolyana.click();
             gamePO.restartPolyana.click();
         }
-        switchGameFrame("mine.php?a=mine&m=start&t=1");
+        switchGameFrame("mine.php?a=mine");
+        gamePO.bigPolyana.click();
         while (gamePO.randomPolyana.isDisplayed()) {
             gamePO.randomPolyana.click();
             gamePO.restartPolyana.click();
