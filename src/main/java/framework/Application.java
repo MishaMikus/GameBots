@@ -34,7 +34,7 @@ public class Application {
         }
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(100, TimeUnit.MICROSECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         LOGGER.info("startChrome():SUCCESS");

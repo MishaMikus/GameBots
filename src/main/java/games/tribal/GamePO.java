@@ -24,6 +24,9 @@ public class GamePO extends Page {
     @FindBy(xpath = "//span[@class='world_button_active']")
     public List<WebControl> worldButtonList;
 
+    @FindBy(xpath = "//a[contains(@id,'main_buildlink_')][not(contains(@id,'cheap'))]")
+    public WebControl buildButton;
+
     public GamePO(WebDriver driver) {
         super(driver);
     }

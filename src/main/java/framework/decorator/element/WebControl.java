@@ -37,9 +37,6 @@ public class WebControl extends RemoteWebElement {
             webElement.click();
             return successMessage(start);
         } catch (Exception e) {
-            if (e.getMessage().contains("Timed out receiving message from renderer")) {
-                throw e;
-            }
             return new Date().getTime() - start.getTime() + " ms - FAIL - Exception " + e.getLocalizedMessage().replaceAll("\\n", "");
         }
     }
