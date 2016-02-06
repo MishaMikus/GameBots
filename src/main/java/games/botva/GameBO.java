@@ -55,6 +55,7 @@ public class GameBO {
             gamePO.restartPolyana.click();
         }
         switchGameFrame("mine.php?a=mine");
+
         gamePO.bigPolyana.click();
         while (gamePO.randomPolyana.isDisplayed()) {
             gamePO.randomPolyana.click();
