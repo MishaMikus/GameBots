@@ -1,7 +1,6 @@
 package games.botvaAvatar;
 
 import framework.Application;
-import framework.decorator.element.WebControl;
 import framework.model.User;
 import org.apache.log4j.Logger;
 
@@ -10,14 +9,12 @@ import java.util.Date;
 public class GameBO {
     private static final Logger LOGGER = Logger.getLogger(GameBO.class);
     private static final long SESSION_TIMEOUT_MS = 10 * 1000;
-    public String botvaServer;
     public User botvaUser;
     public GamePO gamePO;
     private Application application = new Application();
     private static Date start;
 
-    public GameBO(String botvaServer, User botvaUser) {
-        this.botvaServer = botvaServer;
+    public GameBO(User botvaUser) {
         this.botvaUser = botvaUser;
     }
 
@@ -25,18 +22,8 @@ public class GameBO {
         while (true) {
             login(hidden);
             try {
-                zoo();
-                doMine();
-                pier();
                 watchfind();
-                zorro();
-                monster();
-                history();
-                getPrice();
-                arena();
-                sani();
                 dozor();
-                mine();
                 eat();
             } catch (Exception ignored) {
                 close();
@@ -45,41 +32,10 @@ public class GameBO {
         }
     }
 
-    private void zoo() throws InterruptedException {
-        switchGameFrame("castle.php?a=zoo&id=6");
-        switchGameFrame("castle.php?a=zoo&id=6");
-        gamePO.egg.waitForMeDisplay();
-        for (int i = 0; i < 3; i++) {
-            gamePO.eggButton.get(i).click();
-            gamePO.healButton.click();
-            gamePO.healZooTextLabel.waitForMeDisplay();
-            String healZooLevel = gamePO.healZooTextLabel.getText().split("%")[0];
-            if (Integer.parseInt(healZooLevel) < 70) {
-                gamePO.doHealButton.click();
-            }
-            gamePO.feedButton.click();
-            gamePO.cleanTextLabel.waitForMeDisplay();
-            String cleanZooLevel = gamePO.cleanTextLabel.getText().split(" /")[0];
-            System.out.println(cleanZooLevel);
-            if (Integer.parseInt(cleanZooLevel) < 4) {
-                gamePO.doCleanButton.click();
-            }
-        }
-    }
-
-    private void doMine() {
-        switchGameFrame("mine.php?a=open");
-        gamePO.doMine.click();
-    }
 
     private void switchGameFrame(String url) {
-        application.get(botvaServer + url);
+        application.get("http://avatar.botva.ru/m.php#" + url);
         application.switchToFrame("iframe_game");
-    }
-
-    private void mine() {
-        switchGameFrame("mine.php?a=open");
-        gamePO.autoMine.click();
     }
 
     private void dozor() {
@@ -87,90 +43,13 @@ public class GameBO {
         gamePO.autoDozor.click();
     }
 
-    private void sani() throws InterruptedException {
-        start = new Date();
-        switchGameFrame("index.php");
-        if (gamePO.saniButton.isDisplayed()) {
-            gamePO.saniButton.click();
-            Thread.sleep(3 * 1000);
-            while (gamePO.shareButton.isDisplayed()) {
-                application.executeJavascript("javascript:loadUsers(1)");
-                for (int i = 0; i < 6; i++) {
-                    gamePO.shareButton.click();
-                }
-            }
+    private void watchfind() throws InterruptedException {
+        gamePO.energyTextLabel.waitForMeDisplay();
+        while (gamePO.energyTextLabel.getTextAsInt() >= 25) {
+            switchGameFrame("dozor.php");
+            gamePO.watchfindButton.click();
+            gamePO.attackButton.click();
         }
-    }
-
-    private void arena() {
-        switchGameFrame("dozor.php");
-        gamePO.findArenaButton.click();
-
-        if (getEnemyListSize() > 0) {
-            WebControl bestEnemy = gamePO.enemyList.get(0);
-            System.out.println(gamePO.enemyList.get(0).getText());
-            for (WebControl enemy : gamePO.enemyList) {
-                if (enemy.getTextAsInt() < bestEnemy.getTextAsInt()) {
-                    bestEnemy = enemy;
-                }
-            }
-            bestEnemy.click();
-            System.out.println(bestEnemy.getText());
-        }
-    }
-
-    private int getEnemyListSize() {
-        try {
-            return gamePO.enemyList.size();
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    private void getPrice() {
-        switchGameFrame("school.php?m=class3");
-        gamePO.getPriceButton.click();
-    }
-
-    private void history() throws InterruptedException {
-        switchGameFrame("history.php");
-        for (int i = 0; i < 10; i++) {
-            gamePO.historyButton.click();
-        }
-
-        try {
-            int pigs = gamePO.funTextLabel.getTextAsInt();
-            if (pigs >= 2) {
-                gamePO.schoolHistoryShop.click();
-                gamePO.schoolHistoryShopByButton.click();
-                switchGameFrame("history.php?a=shop&type=open");
-                gamePO.schoolHistoryShopOpen.click();
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    private void monster() {
-        switchGameFrame("dozor.php");
-        gamePO.monsterButton.click();
-        gamePO.attackMonsterButton.click();
-    }
-
-    private void zorro() {
-        switchGameFrame("dozor.php");
-        gamePO.zorroButton.click();
-        gamePO.attackButton.click();
-    }
-
-    private void watchfind() {
-        switchGameFrame("dozor.php");
-        gamePO.watchfindButton.click();
-        gamePO.attackButton.click();
-    }
-
-    private void pier() throws InterruptedException {
-        switchGameFrame("harbour.php?a=pier");
-        gamePO.pierButton.click();
     }
 
     private void close() {
@@ -178,17 +57,21 @@ public class GameBO {
     }
 
     private void login(boolean hidden) throws Exception {
-        try{
-        application.startChrome(hidden);
-        start = new Date();
-        application.get(botvaServer);
-        gamePO = new GamePO(application.driver);
-        gamePO.server.click();
-        gamePO.email.sendKeys(botvaUser.login);
-        gamePO.password.sendKeys(botvaUser.pass);
-        gamePO.submit.click();
-        application.switchToFrame("iframe_game");
-        gamePO.lPopupClose.click();}catch (Exception e){}
+        try {
+            application.startChrome(hidden);
+            start = new Date();
+            application.get("http://g2.botva.ru/m.php#");
+            gamePO = new GamePO(application.driver);
+            gamePO.server.click();
+            gamePO.email.sendKeys(botvaUser.login);
+            gamePO.password.sendKeys(botvaUser.pass);
+            gamePO.submit.click();
+            application.switchToFrame("iframe_game");
+            gamePO.lPopupClose.click();
+            application.get("http://g2.botva.ru/avatara.php?a=jump");
+            application.switchToFrame("iframe_game");
+        } catch (Exception e) {
+        }
     }
 
     public void eat() throws InterruptedException {
