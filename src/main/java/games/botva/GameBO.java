@@ -39,6 +39,7 @@ public class GameBO {
                 minePolyana();
                 mine();
                 eat();
+
             } catch (Exception ignored) {
                 close();
             }
