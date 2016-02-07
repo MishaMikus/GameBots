@@ -115,7 +115,7 @@ public class GameBO {
 
     private double getMaxLife(String lifeInfo) {
         if (lifeInfo != null) {
-            return Integer.parseInt(lifeInfo.split("\\|")[3]);
+            return Integer.parseInt(lifeInfo.split("\\|")[3].replaceAll("\\.","").replaceAll("К","000"));
         } else {
             return 0;
         }
@@ -123,7 +123,7 @@ public class GameBO {
 
     private double getCurrentLife(String lifeInfo) {
         if (lifeInfo != null) {
-            return Integer.parseInt(lifeInfo.split("\\|")[1]);
+            return Integer.parseInt(lifeInfo.split("\\|")[1].replaceAll("\\.","").replaceAll("К","000"));
         } else {
             return 0;
         }
