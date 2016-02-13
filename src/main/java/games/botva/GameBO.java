@@ -26,6 +26,7 @@ public class GameBO {
             login(hidden);
             try {
                 zoo();
+                zooDozor();
                 doMine();
                 pier();
                 watchfind();
@@ -47,6 +48,28 @@ public class GameBO {
         }
     }
 
+    private void zooDozor() {
+        try {
+            switchGameFrame("castle.php?a=zoo&id=6");
+            switchGameFrame("castle.php?a=zoo&id=6");
+            gamePO.egg.waitForMeDisplay();
+            for (int i = 0; i < 3; i++) {
+                gamePO.eggButton.get(i).click();
+
+                gamePO.feedButton.click();
+                gamePO.feedZooTextLabel.waitForMeDisplay();
+                String feedZooLevel = gamePO.feedZooTextLabel.getText().split("%")[0];
+                if (Integer.parseInt(feedZooLevel) < 70) {
+                    gamePO.doFeedButton.click();
+                }
+                gamePO.eventsButton.click();
+                gamePO.doDozorButton.click();
+                gamePO.doBigDozorButton.click();
+            }
+        } catch (Exception e) {
+        }
+    }
+
     private void minePolyana() {
         switchGameFrame("mine.php?a=mine");
         gamePO.smallPolyana.click();
@@ -65,25 +88,26 @@ public class GameBO {
 
     private void zoo() throws InterruptedException {
         try {
-        switchGameFrame("castle.php?a=zoo&id=6");
-        switchGameFrame("castle.php?a=zoo&id=6");
-        gamePO.egg.waitForMeDisplay();
-        for (int i = 0; i < 3; i++) {
-            gamePO.eggButton.get(i).click();
-            gamePO.healButton.click();
-            gamePO.healZooTextLabel.waitForMeDisplay();
-            String healZooLevel = gamePO.healZooTextLabel.getText().split("%")[0];
-            if (Integer.parseInt(healZooLevel) < 70) {
-                gamePO.doHealButton.click();
+            switchGameFrame("castle.php?a=zoo&id=6");
+            switchGameFrame("castle.php?a=zoo&id=6");
+            gamePO.egg.waitForMeDisplay();
+            for (int i = 0; i < 3; i++) {
+                gamePO.eggButton.get(i).click();
+                gamePO.healButton.click();
+                gamePO.healZooTextLabel.waitForMeDisplay();
+                String healZooLevel = gamePO.healZooTextLabel.getText().split("%")[0];
+                if (Integer.parseInt(healZooLevel) < 70) {
+                    gamePO.doHealButton.click();
+                }
+                gamePO.feedButton.click();
+                gamePO.cleanTextLabel.waitForMeDisplay();
+                String cleanZooLevel = gamePO.cleanTextLabel.getText().split(" /")[0];
+                if (Integer.parseInt(cleanZooLevel) < 4) {
+                    gamePO.doCleanButton.click();
+                }
             }
-            gamePO.feedButton.click();
-            gamePO.cleanTextLabel.waitForMeDisplay();
-            String cleanZooLevel = gamePO.cleanTextLabel.getText().split(" /")[0];
-            System.out.println(cleanZooLevel);
-            if (Integer.parseInt(cleanZooLevel) < 4) {
-                gamePO.doCleanButton.click();
-            }
-        }}catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     private void doMine() {
@@ -253,7 +277,7 @@ public class GameBO {
 
     private double getMaxLife(String lifeInfo) {
         if (lifeInfo != null) {
-            return Integer.parseInt(lifeInfo.split("\\|")[3].replaceAll("\\.","").replaceAll("К","000"));
+            return Integer.parseInt(lifeInfo.split("\\|")[3].replaceAll("\\.", "").replaceAll("К", "000"));
         } else {
             return 0;
         }
@@ -261,7 +285,7 @@ public class GameBO {
 
     private double getCurrentLife(String lifeInfo) {
         if (lifeInfo != null) {
-            return Integer.parseInt(lifeInfo.split("\\|")[1].replaceAll("\\.","").replaceAll("К","000"));
+            return Integer.parseInt(lifeInfo.split("\\|")[1].replaceAll("\\.", "").replaceAll("К", "000"));
         } else {
             return 0;
         }

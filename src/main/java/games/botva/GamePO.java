@@ -108,11 +108,26 @@ public class GamePO extends Page {
     @FindBy(xpath = "//span[@rel='feed']")
     public WebControl feedButton;
 
+    @FindBy(xpath = "//span[@rel='events']")
+    public WebControl eventsButton;
+
     @FindBy(xpath = "//center[contains(text(),'%')]")
     public WebControl healZooTextLabel;
 
+    @FindBy(xpath = "//*[@class='zoo_about_bar_bg']/div[contains(text(),'%')]")
+    public WebControl feedZooTextLabel;
+
     @FindBy(xpath = "//form/input[@name='do_cmd'][@value='heal']/../input[@type='submit']")
     public WebControl doHealButton;
+
+    @FindBy(xpath = "//form/input[@name='do_cmd'][@value='feed']/../input[@type='submit']")
+    public WebControl doFeedButton;
+
+    @FindBy(xpath = "//form/select[@id='watch_time']/../input[@type='submit']")
+    public WebControl doDozorButton;
+
+    @FindBy(xpath = "//form/input[@name='do_cmd'][@value='do_big']/../input[@type='submit']")
+    public WebControl doBigDozorButton;
 
     @FindBy(xpath = "//form/input[@name='do_cmd'][@value='clean']/../input[@type='submit']")
     public WebControl doCleanButton;
