@@ -5,7 +5,9 @@ import framework.decorator.element.WebControl;
 import framework.model.User;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GameBO {
     private static final Logger LOGGER = Logger.getLogger(GameBO.class);
@@ -35,7 +37,14 @@ public class GameBO {
 
     private void build() throws InterruptedException {
         application.get(currentServer + "?screen=main");
-        application.get(gamePO.buildButton.getAttribute("href"));
+        List<String> buildingURLList=new ArrayList<>();
+        for(WebControl wc:gamePO.buildButtonList){
+            if(wc.isDisplayed())
+            buildingURLList.add(wc.getAttribute("href"));
+        }
+        for(String buildURL:buildingURLList){
+            application.get(buildURL);
+        }
     }
 
     private void loginNextWorld() throws InterruptedException {
