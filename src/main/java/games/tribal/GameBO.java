@@ -26,13 +26,14 @@ public class GameBO {
 
     public void startGame(boolean hidden) throws Exception {
         while (true) {
+            try{
             application.startChrome(hidden);
             start = new Date();
             login();
             loginNextWorld();
             build();
             application.stopChrome();
-        }
+        }catch (Exception e){}}
     }
 
     private void build() throws InterruptedException {
