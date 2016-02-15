@@ -16,14 +16,19 @@ public class GameBO {
         while (true) {
             login(hidden);
             try {
-                watchfind();
-                dozor();
-                System.out.println();
+               // watchfind();
+               // dozor();
+                mine();
             } catch (Exception ignored) {
                 close();
             }
             close();
         }
+    }
+
+    private void mine() {
+        switchGameFrame("dozor.php");
+        gamePO.autoDozor.click();
     }
 
 
