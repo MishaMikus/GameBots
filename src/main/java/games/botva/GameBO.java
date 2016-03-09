@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class GameBO {
     private static final Logger LOGGER = Logger.getLogger(GameBO.class);
-    private static final long SESSION_TIMEOUT_MS = 10 * 1000;
+    private static final long SESSION_TIMEOUT_MS = 60*60 * 1000;
     public String botvaServer;
     public User botvaUser;
     public GamePO gamePO;
@@ -25,20 +25,20 @@ public class GameBO {
         while (true) {
             login(hidden);
             try {
-                zoo();
-                zooDozor();
-                doMine();
-                pier();
-                watchfind();
-                zorro();
-                monster();
-                history();
-                getPrice();
-                arena();
-                sani();
-                dozor();
-                minePolyana();
-                mine();
+//                zoo();
+//                zooDozor();
+//                doMine();
+//                pier();
+//                watchfind();
+//                zorro();
+//                monster();
+//                history();
+//                getPrice();
+//                arena();
+//                sani();
+//                dozor();
+//                minePolyana();
+//                mine();
                 eat();
 
             } catch (Exception ignored) {

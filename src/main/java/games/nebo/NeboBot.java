@@ -1,9 +1,10 @@
 package games.nebo;
 
+import framework.Property;
 import framework.model.User;
 
 public class NeboBot {
     public static void main(String[] srg) throws Exception {
-       new GameBO("http://nebo.mobi/login",new User("silversmith", "Student1")).startGame(true);
+       new GameBO(Property.get("NeboBot.url"),new User(Property.get("NeboBot.user"),Property.get("NeboBot.pass"))).startGame(false);
     }
 }
