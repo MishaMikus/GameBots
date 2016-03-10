@@ -25,20 +25,20 @@ public class GameBO {
         while (true) {
             login(hidden);
             try {
-//                zoo();
-//                zooDozor();
-//                doMine();
-//                pier();
-//                watchfind();
-//                zorro();
-//                monster();
-//                history();
-//                getPrice();
-//                arena();
-//                sani();
-//                dozor();
-//                minePolyana();
-//                mine();
+                zoo();
+                zooDozor();
+                doMine();
+                pier();
+                watchfind();
+                zorro();
+                monster();
+                history();
+                getPrice();
+                arena();
+                sani();
+                dozor();
+                minePolyana();
+                mine();
                 eat();
 
             } catch (Exception ignored) {
