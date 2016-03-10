@@ -16,8 +16,8 @@ public class GameBO {
         while (true) {
             login(hidden);
             try {
-               // watchfind();
-               // dozor();
+                watchfind();
+                dozor();
                 mine();
             } catch (Exception ignored) {
                 close();

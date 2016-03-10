@@ -22,13 +22,9 @@ public class Property {
             input.close();
         }
         if (value == null) {
-            value = getFromSysEnv(key);
+            value = System.getenv(key);
         }
         LOGGER.info(key + " = " + value);
         return value;
-    }
-
-    public static String getFromSysEnv(String key) throws IOException {
-        return System.getenv(key);
     }
 }
