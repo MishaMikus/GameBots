@@ -39,6 +39,7 @@ public class GameBO {
                 dozor();
                 minePolyana();
                 mine();
+
                 eat();
 
             } catch (Exception ignored) {
