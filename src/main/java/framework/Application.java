@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -33,9 +34,9 @@ public class Application {
         }
 
         driver = new ChromeDriver(options);
-       // driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-       // driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-       // driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         LOGGER.info("startChrome():SUCCESS");
     }
 
