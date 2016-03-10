@@ -20,6 +20,7 @@ public class GameBO {
         this.server = server;
         this.user = user;
         application = new Application();
+
     }
 
     public void startGame(boolean hide) throws Exception {
