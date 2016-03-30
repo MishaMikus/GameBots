@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="Botva" />
+        <module name="GameBots" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Botva" target="1.7" />
+      <module name="GameBots" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
